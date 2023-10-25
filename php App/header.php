@@ -1,3 +1,30 @@
+<?php
+include "db_conn.php";
+$user_id = $_SESSION['id'];
+    try {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $user_id);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user['image'] == '') {
+            $profile_picture = "
+                <img class='img-fluid'
+                src='upload/imageProfile/user_icon.png'
+                alt='User profile picture'>
+            ";
+        } else {
+            $profile_picture = "
+                <img class='img-fluid' width='180' class='img-responsive rounded-circle' style='border-radius: 100% 100%;'
+                src='upload/imageProfile/{$user['image']}'
+                alt='User profile picture'>
+            ";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        // Handle the database error as needed
+    }
+?>
 <nav id="sidebar">
     <div class="sidebar_blog_1">
         <div class="sidebar-header">
@@ -8,7 +35,7 @@
         <div class="sidebar_user_info">
             <div class="icon_setting"></div>
             <div class="user_profle_side">
-                <div class="user_img"><img class="img-responsive" src="images/layout_img/avatar.jpg" alt="#" /></div>
+                <div class="user_img"><?php echo $profile_picture; ?></div>
                 <div class="user_info">
                     <h6><?php echo $_SESSION['name']; ?></h6>
                     <p><span class="online_animation"></span> Online</p>
@@ -19,17 +46,9 @@
     <div class="sidebar_blog_2">
         <h4>General</h4>
         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
-                <ul class="collapse list-unstyled" id="dashboard">
-                    <li>
-                        <a href="dashboard.html">> <span>Default Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a href="dashboard_2.html">> <span>Dashboard style 2</span></a>
-                    </li>
-                </ul>
-            </li>
+            <li><a href="dashboard.php"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a></li>
+            <li><a href="profile.php"><i class="fa fa-user orange_color"></i><span>User Profile</span></a></li>
+            <li><a href="category-index.php"><i class="fa fa-diamond purple_color"></i><span>Category</span></a></li>
             <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
             <li>
                 <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Elements</span></a>

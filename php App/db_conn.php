@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; 
-$dbname = 'bank_system'; 
+$dbname = 'online_store'; 
 $username = 'root'; 
 $password = '123456789'; 
 
@@ -11,4 +11,5 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
+
 ?>
