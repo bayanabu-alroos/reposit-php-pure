@@ -115,7 +115,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> View Student Data </h5>
+                            <h5 class="modal-title" id="exampleModalLabel"> Active Category Data </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -169,7 +169,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Category Name</th>
+                                                            <th>Category Title</th>
                                                             <th>Active</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -201,11 +201,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
-                                                    <?php
+                                                            <?php
                                                             }
-                                                        } else {
-                                                            echo "No Record Found";
-                                                        }
+                                                        } else { ?>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="8" class="text-center text-capitalize  fs-1">No Record Found </td>
+                                                                </tr>
+                                                            </tbody>
+                                                    <?php  }
                                                     } else {
                                                         // Handle the error if the query execution fails
                                                         echo "Query execution failed: " . print_r($stmt->errorInfo(), true);
@@ -245,8 +249,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
         </script>
         <script src="js/custom.js"></script>
         <script src="js/semantic.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
         <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>

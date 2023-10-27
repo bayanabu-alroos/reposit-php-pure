@@ -541,7 +541,9 @@ a:focus {
 .orange_color2 {
     color: #f44336 !important;
 }
-
+.red_color{
+    color: #fc2010 !important;
+}
 .orange_bg2 {
     background: #f44336 !important;
 }

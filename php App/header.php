@@ -51,12 +51,10 @@ $user_id = $_SESSION['id'];
             <li><a href="category-index.php"><i class="fa fa-diamond purple_color"></i><span>Category</span></a></li>
             <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
             <li>
-                <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Elements</span></a>
+                <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-desktop red_color"></i><span>Products</span></a>
                 <ul class="collapse list-unstyled" id="element">
-                    <li><a href="general_elements.html">> <span>General Elements</span></a></li>
-                    <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                    <li><a href="icons.html">> <span>Icons</span></a></li>
-                    <li><a href="invoice.html">> <span>Invoice</span></a></li>
+                    <li><a href="product-index.php">> <span>Products </span></a></li>
+                    <li><a href="product-create.php">> <span>Product Create</span></a></li>
                 </ul>
             </li>
             <li><a href="tables.html"><i class="fa fa-table purple_color2"></i> <span>Tables</span></a></li>
