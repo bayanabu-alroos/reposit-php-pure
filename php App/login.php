@@ -25,7 +25,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     } else {
         $pass = md5($pass);
 
-        $stmt = $conn->prepare("SELECT * FROM users WHERE user_name = :uname AND password = :pass");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_name = :uname AND password = :pass AND is_Active =0");
         $stmt->bindParam(':uname', $uname);
         $stmt->bindParam(':pass', $pass);
         $stmt->execute();

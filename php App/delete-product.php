@@ -9,7 +9,7 @@ if (isset($_POST['deletedata'])) {
     $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        header("Location: product-index.php?success=Data Deleted successfully");
+        header("Location: product-index.php?success=Data Inactive successfully");
         exit();
     } else {
         $errorInfo = $stmt->errorInfo();

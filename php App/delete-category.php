@@ -9,7 +9,7 @@
         $stmt->bindParam(':cat_id', $cat_id, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-        header("Location: category-index.php?success=Data Deleted successfully");
+        header("Location: category-index.php?success=Data Inactive successfully");
         exit();
     } else {
         $errorInfo = $stmt->errorInfo();

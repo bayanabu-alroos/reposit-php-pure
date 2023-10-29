@@ -49,7 +49,6 @@ $user_id = $_SESSION['id'];
             <li><a href="dashboard.php"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a></li>
             <li><a href="profile.php"><i class="fa fa-user orange_color"></i><span>User Profile</span></a></li>
             <li><a href="category-index.php"><i class="fa fa-diamond purple_color"></i><span>Category</span></a></li>
-            <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
             <li>
                 <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-desktop red_color"></i><span>Products</span></a>
                 <ul class="collapse list-unstyled" id="element">
@@ -57,6 +56,7 @@ $user_id = $_SESSION['id'];
                     <li><a href="product-create.php">> <span>Product Create</span></a></li>
                 </ul>
             </li>
+            <li><a href="users-index.php"><i class="fa fa-users green_color"></i><span>Users</span></a></li>
             <li><a href="tables.html"><i class="fa fa-table purple_color2"></i> <span>Tables</span></a></li>
             <li>
                 <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Apps</span></a>

@@ -2,8 +2,6 @@
 session_start();
 include "db_conn.php"; // Include your database connection
 
-
-
 function validate($data)
 {
     $data = trim($data);
@@ -11,6 +9,7 @@ function validate($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+
 if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     if (isset($_GET['product_id'])) {
         $product_id = $_GET['product_id'];
@@ -30,17 +29,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     } else {
         echo "Product ID not provided"; // Handle the case when product_id is not in the URL.
     }
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $product_title = $_POST['product_title'];
-        $cat_id = $_POST['cat_id'];
-        $product_price = $_POST['product_price'];
-        $past_price = !empty($_POST['past_price']) ? $_POST['past_price'] : null; // Set to null if empty
-        $product_desc = $_POST['product_desc'];
-        $product_keywords = $_POST['product_keywords'];
-        $cat_id = $_POST['cat_id'];
+        $product_title = validate($_POST['product_title']);
+        $cat_id = validate($_POST['cat_id']);
+        $product_price = validate($_POST['product_price']);
+        $past_price = !empty($_POST['past_price']) ? validate($_POST['past_price']) : null; // Set to null if empty
+        $product_desc = validate($_POST['product_desc']);
+        $product_keywords = validate($_POST['product_keywords']);
+        $product_id = $_POST['product_id'];
+
 
         // Validation (you can add more validation as needed)
         $errors = [];
+
         if (empty($product_title)) {
             $errors['product_title'] = 'Product Title is required';
         }
@@ -57,29 +59,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             $errors['cat_id'] = 'Select Category Title is required';
         }
 
-        // Add more validation as needed
-
         if (empty($errors)) {
-            // Prepare the SQL query
-            $query = "UPDATE products
-            SET product_title = ?, cat_id = ?, product_img1 = ?, product_img2 = ?, product_img3 = ?, product_img4 = ?,
-            product_price = ?, past_price = ?, product_desc = ?, product_keywords = ?
-            WHERE product_id = ?";
-
-            $stmt = $conn->prepare($query);
-
-            // Bind parameters
-            $stmt->bindParam(1, $product_title);
-            $stmt->bindParam(2, $cat_id);
-            $stmt->bindParam(3, $product_img1);
-            $stmt->bindParam(4, $product_img2);
-            $stmt->bindParam(5, $product_img3);
-            $stmt->bindParam(6, $product_img4);
-            $stmt->bindParam(7, $product_price);
-            $stmt->bindParam(8, $past_price);
-            $stmt->bindParam(9, $product_desc);
-            $stmt->bindParam(10, $product_keywords);
-            $stmt->bindParam(11, $product_id);
             // Image file handling (upload and save to a directory)
             $product_img1 = $_FILES['product_img1']['name'];
             $product_img2 = $_FILES['product_img2']['name'];
@@ -90,10 +70,33 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             $temp_name2 = $_FILES['product_img2']['tmp_name'];
             $temp_name3 = $_FILES['product_img3']['tmp_name'];
             $temp_name4 = $_FILES['product_img4']['tmp_name'];
+
             move_uploaded_file($temp_name1, "upload/imagesProduct/$product_img1");
             move_uploaded_file($temp_name2, "upload/imagesProduct/$product_img2");
             move_uploaded_file($temp_name3, "upload/imagesProduct/$product_img3");
             move_uploaded_file($temp_name4, "upload/imagesProduct/$product_img4");
+            // Prepare the SQL query
+            $query = "UPDATE products
+            SET cat_id = ?, product_title = ?, product_img1 = ?, product_img2 = ?, 
+            product_price = ?, past_price = ?, product_desc = ?, product_keywords = ?, 
+            product_img3 = ?, product_img4 = ?
+            WHERE product_id = ?";
+
+            // Use $conn to prepare the statement
+            $stmt = $conn->prepare($query);
+
+            // Bind parameters
+            $stmt->bindParam(1, $cat_id, PDO::PARAM_INT);
+            $stmt->bindParam(2, $product_title, PDO::PARAM_STR);
+            $stmt->bindParam(3, $product_img1, PDO::PARAM_STR);
+            $stmt->bindParam(4, $product_img2, PDO::PARAM_STR);
+            $stmt->bindParam(5, $product_price, PDO::PARAM_INT);
+            $stmt->bindParam(6, $past_price, PDO::PARAM_INT);
+            $stmt->bindParam(7, $product_desc, PDO::PARAM_STR);
+            $stmt->bindParam(8, $product_keywords, PDO::PARAM_STR);
+            $stmt->bindParam(9, $product_img3, PDO::PARAM_STR);
+            $stmt->bindParam(10, $product_img4, PDO::PARAM_STR);
+            $stmt->bindParam(11, $product_id, PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("Location: product-index.php?success=Product has been Updated successfully");
@@ -104,7 +107,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
             }
         }
     }
+
 ?>
+
 
     <!DOCTYPE html>
     <html lang="en">

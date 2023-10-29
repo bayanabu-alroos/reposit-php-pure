@@ -34,96 +34,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     <body class="inner_page contact_page">
         <div class="full_container">
             <!-- Create POP UP FORM (Bootstrap MODAL) -->
-            <div class="modal fade" id="cat-add-Model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Create New Category</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <form action="insert-category.php" method="POST">
-                            <div class="modal-body">
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" required id="cat_title" name="cat_title" placeholder="Enter Category Title">
-                                    <label for="cat_title">Category Title</label>
-                                </div>
-                                <?php if (isset($errors['cat_title'])) : ?>
-                                    <div class="text-danger"><?php echo $errors['cat_title']; ?></div>
-                                <?php endif; ?>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    <button type="submit" name="insertdata" id="insertButton" class="btn btn-primary">Save Data</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
-            <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Edit Student Data </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="update-category.php" method="POST">
-                            <div class="modal-body">
-                                <input type="hidden" name="cat_id" id="update_id">
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" name="cat_title" id="fname" placeholder="Enter Category Title">
-                                    <label for="cat_title">Category Title</label>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-            <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
-            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Inactive Category Data </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="delete-category.php" method="POST">
-                            <div class="modal-body">
-                                <input type="hidden" name="cat_id" id="delete_id">
-                                <h4> Do you want to Inactive this Data ??</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                                <button type="submit" name="deletedata" class="btn btn-danger"> Yes !! Inactive it. </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- VIEW POP UP FORM (Bootstrap MODAL) -->
             <div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"> Active Category Data </h5>
+                            <h5 class="modal-title" id="exampleModalLabel"> Active User Data </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="active-category.php" method="POST">
+                        <form action="active-user.php" method="POST">
                             <div class="modal-body">
                                 <h4>Do you want to Active this Data ??</h4>
-                                <input type="hidden" name="cat_id" id="view_id">
+                                <input type="hidden" name="id" id="view_id">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"> CLOSE </button>
@@ -131,6 +54,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                             </div>
                         </form>
 
+                    </div>
+                </div>
+            </div>
+            <!-- update is active DELETE POP UP FORM (Bootstrap MODAL) -->
+            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Inactive User Data </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="delete-user.php" method="POST">
+                            <div class="modal-body">
+                                <input  type="hidden" name="id" id="delete_id">
+                                <h4> Do you want to Inactive  this Data ??</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
+                                <button type="submit" name="deletedata" class="btn btn-danger"> Yes !! Inactive  it. </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -143,7 +89,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                             <div class="row column_title">
                                 <div class="col-md-12">
                                     <div class="page_title">
-                                        <h2>Categories Table</h2>
+                                        <h2>User Table</h2>
                                     </div>
                                 </div>
                             </div>
@@ -152,41 +98,55 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                     <div class="white_shd full margin_bottom_30">
                                         <div class="table_section padding_infor_info">
                                             <div class="table-responsive-sm">
-                                                <button type="button" class="model_bt btn cur-p btn-success mb-3" data-toggle="modal" data-target="#cat-add-Model">
-                                                    Create Category
-                                                </button>
+                                                <a type="button" href="user-create.php" class="btn cur-p btn-success mb-3">
+                                                    Create User
+                                                </a>
                                                 <?php if (isset($_GET['success'])) { ?>
                                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                                         <?php echo $_GET['success']; ?>
                                                     </div>
                                                 <?php } ?>
-                                                <?php
-                                                include "db_conn.php";
-                                                $query = "SELECT * FROM categories";
-                                                $stmt = $conn->prepare($query);
-                                                ?>
                                                 <table id="datatableid" class="table table-bordered table-dark">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Category Title</th>
+                                                            <th>Image User</th>
+                                                            <th> User Name</th>
+                                                            <th> Name</th>
+                                                            <th> Number Phone</th>
+                                                            <th>User Type</th>
                                                             <th>Active</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <?php
-                                                    if ($stmt->execute()) { // Execute the prepared statement
+                                                    include "db_conn.php";
+                                                    $query = "SELECT * FROM users";
+                                                    $stmt = $conn->prepare($query);
+                                                    if ($stmt->execute()) {
                                                         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                                        if ($result) {
+                                                        if (!empty($result)) {
                                                             foreach ($result as $row) {
+                                                                if ($row['image'] == '') {
+                                                                    $user_image = "
+                                                                    <img class='img-fluid' width='150' class='img-responsive rounded-circle'  
+                                                                    src='upload/imageProfile/user_icon.png' alt='User image'>";
+                                                                } else {
+                                                                    $user_image = "
+                                                                    <img class='img-fluid' width='150' class='img-responsive rounded-circle' 
+                                                                    src='upload/imageProfile/{$row['image']}' alt='User image'>";
+                                                                }
                                                     ?>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td> <?php echo $row['cat_id']; ?> </td>
-                                                                        <td> <?php echo $row['cat_title']; ?> </td>
+                                                                        <td> <?php echo $row['id']; ?> </td>
+                                                                        <td> <?php echo $user_image; ?></td>
+                                                                        <td> <?php echo $row['user_name']; ?> </td>
+                                                                        <td> <?php echo $row['name']; ?> </td>
+                                                                        <td> <?php echo $row['phone']; ?> </td>
+                                                                        <td><?php echo $row['type_user']; ?> </td>
                                                                         <td>
-                                                                            <?php
+                                                                        <?php
                                                                             if ($row['is_Active'] == 0) {
                                                                                 echo '<h6 style="font-size: 15px;" class=" rounded-pill badge badge-success">Active</h6>';
                                                                             } else if ($row['is_Active'] == 1) {
@@ -195,7 +155,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                                                                             ?>
                                                                         </td>
                                                                         <td>
-                                                                            <button type="button" class="btn btn-warning editbtn"><i class="fa fa-edit"></i></button>
+                                                                            <a href="user-update.php?id=<?php echo $row['id']; ?>" class="btn btn-warning editbtn"><i class="fa fa-edit"></i></a>
                                                                             <button type="button" class="btn btn-danger deletebtn"><i class="fa fa-thumbs-down"></i></button>
                                                                             <button type="button" class="btn btn-info viewbtn"><i class="fa fa-thumbs-up"></i></button>
                                                                         </td>
@@ -264,8 +224,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
                 $('#datatableid').DataTable({
                     "pagingType": "full_numbers",
                     "lengthMenu": [
-                        [10, 25, 50, -1],
-                        [10, 25, 50, "All"]
+                        [5,10, 25, 50, -1],
+                        [5,10, 25, 50, "All"]
                     ],
                     responsive: true,
                     language: {
